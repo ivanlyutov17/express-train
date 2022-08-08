@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include ('./partials/head.ejs') %>
+
+<body>
+    <%- include ('./partials/nav.ejs') %>
+    <div class="header">
+        <h1>All posts</h1>
+        <div class="all-posts">
+
+        <% if(posts.length) {%>
+            <% posts.forEach(({id,author,title,text,date})=>{ %>
+                <div class="post">
+                    <p><%= author %></p>
+                    <p><%= title %></p>
+                    <p><%= text %></p>
+                    <p><%= date %></p>
+                </div>
+            <% }) %>
+            <% } %>
+    </div>
+        </div>
+
+        
+
+</body>
+</html>
