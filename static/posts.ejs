@@ -9,12 +9,14 @@
         <div class="all-posts">
 
         <% if(posts) {%>
-            <% posts.forEach(({id,author,title,text,date})=>{ %>
+            <% posts.forEach(({id,author,title,text,createdAt})=>{ %>
                 <div class="post">
-                    <h3><%= author %></p>
-                    <h4><%= title %></p>
+                    <a href="/posts/<%= id%>"><h3><%= title %></h3></a>
+                    <h4><%= author %></h4>
                     <p><%= text %></p>
-                    <p><b><%= date %></b></p>
+                    <p><b><%= createdAt.toLocaleDateString() %></b></p>
+                    <button  data-id="<%= id%>">Редактировать</button>
+                    <button     data-id="<%= id%>">Удалить</button>
                 </div>
             <% }) %>
             <% } %>
@@ -22,6 +24,15 @@
         </div>
 
         
-
+<script>
+    document.addEventListener('click', (e)=>{
+        const id = e.target?.dataset?.id || null;
+        if(id){
+            fetch(`posts/${id}`,{
+                method: 'delete',
+            }).then(window.location.reload())
+        }
+    })
+</script>
 </body>
 </html>
