@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const validator = require('./middlewares');
 
 var morgan = require('morgan')
 const app = express();
@@ -24,7 +25,6 @@ app.get('/',(req,res)=>{
 })
 app.get('/posts',(req,res)=>{
     const title = 'Posts'
-    posts.push(postData);
     res.render(path.join(__dirname, 'static','posts.ejs'),{title,posts});
 })
 app.post('/newPost',(req,res)=>{
@@ -36,7 +36,12 @@ app.post('/newPost',(req,res)=>{
       author,
       text,
     };
-    res.render(path.join(__dirname, 'static','newPost.ejs'), { title });
+    let page = validator(postData);
+    if (page !== 'error.ejs') posts.push(postData);
+    res.setHeader("Content-Type", "text/html");
+    page !== 'error.ejs'?    res.redirect('/posts'):
+    res.render(path.join(__dirname, 'static','error.ejs'));
+
 })
 app.get('/newPost',(req,res)=>{
     const title = 'Add post'

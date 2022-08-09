@@ -8,13 +8,13 @@
         <h1>All posts</h1>
         <div class="all-posts">
 
-        <% if(posts.length) {%>
+        <% if(posts) {%>
             <% posts.forEach(({id,author,title,text,date})=>{ %>
                 <div class="post">
-                    <p><%= author %></p>
-                    <p><%= title %></p>
+                    <h3><%= author %></p>
+                    <h4><%= title %></p>
                     <p><%= text %></p>
-                    <p><%= date %></p>
+                    <p><b><%= date %></b></p>
                 </div>
             <% }) %>
             <% } %>

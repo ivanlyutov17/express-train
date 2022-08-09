@@ -119,3 +119,6 @@ form {
     background-color: rgba(0, 0, 0, 0.6);
   }
   
+  .post h3,h4,p{
+    margin-bottom: 15px;
+  }
